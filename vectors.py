@@ -33,6 +33,9 @@ class Vector:
             raise ValueError("Cosine similarity is undefined for zero vectors")
         return self.dot(other) / denominator
 
+    def __mul__(self, scalar: int | float) -> Vector:
+        return Vector([x * scalar for x in self.components])
+
     def __repr__(self) -> str:
         return f"Vector({self.components})"
 
