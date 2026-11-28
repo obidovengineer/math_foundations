@@ -44,4 +44,19 @@ if __name__ == "__main__":
     print(f"Shear (1,1) kx=1: ({sheared[0]:.1f}, {sheared[1]:.1f})")
 
     reflected = mat_vec_mul(reflection_y(), [2.0, 1.0])
-    print(f"Reflect (2,1) across y: ({reflected[0]:.1f}, {reflected[1]:.1f})")
+    print(f"Reflect (2,1) across y: ({reflected[0]:.1f}, {reflected[1]:.1f})\n")
+
+    # Composition of transformations
+    R = rotation_2d(math.pi / 2)
+    S = scaling_2d(2, 0.5)
+
+    rotate_then_scale = mat_mul(S, R)
+    scale_then_rotate = mat_mul(R, S)
+
+    point = [1.0, 0.0]
+    result1 = mat_vec_mul(rotate_then_scale, point)
+    result2 = mat_vec_mul(scale_then_rotate, point)
+
+    print(f"Rotate 90 then scale: ({result1[0]:.2f}, {result1[1]:.2f})")
+    print(f"Scale then rotate 90: ({result2[0]:.2f}, {result2[1]:.2f})")
+    print(f"Same? {result1 == result2}")
